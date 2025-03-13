@@ -26,7 +26,7 @@ function HomeForm() {
     };
 
     getData();
-  }, []); 
+  }, [id]);
 
   if (loading) {
     return <div>Cargando...</div>;

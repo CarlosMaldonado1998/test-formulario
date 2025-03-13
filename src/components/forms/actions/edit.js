@@ -17,7 +17,7 @@ const EditForm = ({ data }) => {
   const [idForm, setIdForm] = useState(0);
   const [questions, setQuestions] = useState([]);
   const { showNotification } = useNotification();
-  const information = data[0];
+  const information = data && data.length > 0 ? data[0] : null;
 
   const handleShowNotification = (mesasage, variant) => {
     showNotification(mesasage, {
@@ -50,6 +50,7 @@ const EditForm = ({ data }) => {
         handleShowNotification("Error al actualizar las preguntas", "error");
         return;
       }
+      router.reload();
     } catch (error) {
       handleShowNotification(
         "Hubo un error al conectar con el servidor.",

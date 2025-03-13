@@ -55,7 +55,7 @@ const MultipleChoice = ({
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", textAlign: "center" }}>
+    <>
       <TextField
         label="Agregar respuesta"
         variant="outlined"
@@ -97,7 +97,7 @@ const MultipleChoice = ({
           </div>
         ))}
       </FormGroup>
-    </div>
+    </>
   );
 };
 

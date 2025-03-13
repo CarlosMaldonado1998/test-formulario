@@ -52,6 +52,8 @@ const CreateForm = () => {
         handleShowNotification("Error al guardar las preguntas", "error");
         return;
       }
+
+      router.push("/forms");
     } catch (error) {
       handleShowNotification(
         "Hubo un error al conectar con el servidr.",
