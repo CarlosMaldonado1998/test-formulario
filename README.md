@@ -1,40 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+# FORMULARIOS
 
-First, run the development server:
+Este proyecto es una prueba técnica que consiste en la creación de un sistema de formularios, desarrollado con React.js en el frontend, Supabase como base de datos y desplegado en Vercel.
+
+La aplicación permite a los usuarios configurar formularios dinámicos, similares a Google Forms, para la recolección de datos en encuestas o formularios personalizados.
+
+
+## 1. Demo
+
+El proyecto está desplegado y disponible en la siguiente URL:
+
+🔗 [PROYECTO EN VIVO](https://test-formulario.vercel.app/login)
+
+Credenciales de acceso: 
+correo: kardaniel1998@gmail.com
+contraseña: admin
+
+## 2. Instalación
+
+1. Clonar el repositorio
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/CarlosMaldonado1998/test-formulario.git
+cd test-formulario
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instalar dependencias
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+npm install 
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+3. Configurar las variables de entorno
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Crea un archivo .env.local en la raíz del proyecto y agrega las credenciales necesarias para la integración con Supabase.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-## Learn More
+4. Ejecutar el proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install 
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+La aplicación estará disponible en http://localhost:3000/.
+## 3. Dependencias
+Para que el proyecto funcione correctamente, es necesario contar con las siguientes dependencias y configuraciones:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### 🔑 Cuentas necesarias
 
-## Deploy on Vercel
+1. Supabase:
+- Se requiere tener una cuenta en Supabase para la gestión de la base de datos y autenticación.
+- Crear un proyecto en Supabase para obtener las credenciales necesarias (URL y API Key).
+#### Vercel:
+- Para el despliegue automático del proyecto, es necesario tener una cuenta en Vercel.
+- Vercel se integra con GitHub y permite el despliegue continuo al hacer push a la rama master del repositorio.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+
+
+## 4. Estructura Base de Datos
+
+El proyecto utiliza Supabase como base de datos y sigue la siguiente estructura:
+
+📌 Tabla: forms
+
+Almacena la información de los formularios creados.
+
+``` sql
+  CREATE TABLE forms (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  status BOOLEAN DEFAULT TRUE, -- TRUE significa activo, FALSE inactivo
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+📌 Tabla: questions_responses
+
+Guarda las preguntas y respuestas asociadas a cada formulario.
+
+``` sql
+CREATE TABLE questions_responses (
+  id SERIAL PRIMARY KEY,
+  form_id INTEGER NOT NULL REFERENCES forms(id) ON DELETE CASCADE,
+  text TEXT NOT NULL,
+  type INTEGER NOT NULL,
+  options JSONB,
+  response TEXT,
+  selected_option TEXT,
+  selected_answers_multiple JSONB,
+  status BOOLEAN DEFAULT TRUE, -- TRUE activo, FALSE inactivo
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+## 5. Despliegue Continuo
+El proyecto está configurado con despliegue continuo en Vercel. Esto significa que cada vez que se suben cambios a la rama master, el proyecto se autodespliega automáticamente en el entorno de producción.
+
+###### 🔧 Configuración en Vercel
+Se han definido las variables de entorno necesarias en Vercel para garantizar que la aplicación funcione correctamente con Supabase y otras configuraciones esenciales.
+Vercel detecta automáticamente los cambios en el repositorio y ejecuta el despliegue sin necesidad de intervención manual.
+###### 🌐 URL del Proyecto
+El proyecto desplegado está disponible en: [FORMULARIOS](https://test-formulario.vercel.app/login)
+
+
+## 6. Tecnologías Utilizadas
+
+Este proyecto fue desarrollado utilizando las siguientes tecnologías:
+
+- React.js – Biblioteca para la construcción de interfaces de usuario.
+- Next.js – Framework de React que facilita el desarrollo y el renderizado del lado del servidor (SSR).
+- Supabase – Plataforma backend que proporciona autenticación, base de datos y almacenamiento.
+- Vercel – Plataforma de despliegue para aplicaciones frontend.
+- Material UI – Biblioteca de componentes para estilizar la interfaz de usuario con un diseño moderno y accesible.
+
