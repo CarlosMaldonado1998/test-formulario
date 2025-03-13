@@ -44,7 +44,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 4. Ejecutar el proyecto
 
 ```bash
-npm install 
+npm run dev
 ```
 
 La aplicación estará disponible en http://localhost:3000/.
